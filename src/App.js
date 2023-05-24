@@ -10,10 +10,18 @@ function App() {
 }
 
 function ListDemo() {
-  let list = ["237", "239"];
+  // let list = ["237", "239"];//stateless
+  let [list, setList] = useState(["237"]); //statefull
+
+  let addNewImage = () => {
+    let newList = ["238", ...list];
+    setList(newList);
+  };
   return (
     <div>
       <h1>List Demo</h1>
+
+      <input type="button" value="Add new Image" onClick={addNewImage} />
 
       {list.map((item, index) => (
         <EventDemo key={index} Imageid={item} />
