@@ -4,10 +4,20 @@ import { useState } from "react";
 function App() {
   return (
     <div>
-      {/**EventDemo is name of function , attribute are parameter */}
-      <EventDemo Imageid="237" />
-      <hr />
-      <EventDemo Imageid="239" />
+      <ListDemo />
+    </div>
+  );
+}
+
+function ListDemo() {
+  let list = ["237", "239"];
+  return (
+    <div>
+      <h1>List Demo</h1>
+
+      {list.map((item, index) => (
+        <EventDemo key={index} Imageid={item} />
+      ))}
     </div>
   );
 }
