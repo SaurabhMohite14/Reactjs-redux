@@ -15,7 +15,18 @@ function ListDemo() {
 
   let [imageInput, setImageInput] = useState("");
 
+  let [isinvalid, setIsInvalid] = useState(false);
+
   let addNewImage = () => {
+    if (!imageInput) {
+      alert("Enter the imageId");
+      return;
+    }
+
+    let imgInput = parseInt(imageInput);
+    if (!imgInput) {
+      setIsInvalid(true);
+    }
     // let newList = ["238", ...list];
     let newList = [imageInput, ...list];
     setList(newList);
@@ -35,7 +46,9 @@ function ListDemo() {
           value={imageInput}
           onChange={inputImageHandler}
         />
+
         <input type="button" value="Add new Image" onClick={addNewImage} />
+        {isinvalid && <div className="text-danger">Invalid IMage</div>}
       </div>
       {list.map((item, index) => (
         <EventDemo key={index} Imageid={item} />
