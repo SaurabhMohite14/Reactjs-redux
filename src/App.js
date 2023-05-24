@@ -10,50 +10,22 @@ function App() {
 }
 
 function EventDemo() {
-  let [counter] = useState(100);
+  let [counter, setCounter] = useState(100);
 
   //Member func
   let likeMe = () => {
-    alert();
-  };
+    counter += 1;
 
-  //default covention of the param name is :: e,e1
-  // e very used=ful when working input element
-  let likeMe1 = (e) => {
-    console.log(e);
-    console.log(e.target);
-  };
+    //Trigger the dom Operation:: Asking the REACT to perform DOM
 
-  // custom param
-  let likeMe2 = (p1, p2) => {
-    console.log(p1);
-  };
-
-  let likeMe3 = (e, p1) => {
-    console.log(p1);
-    console.log(e);
+    setCounter(counter);
   };
 
   return (
     <div>
+      <img src="http://picsum.photos/id/237/300" alt="" />
       <h1>Like {counter}</h1>
       <input type="button" value="Like Me" onClick={likeMe} />
-      <input type="button" value="Like Me1" onClick={likeMe1} />
-      {/**For usr Defined param */}
-
-      <input
-        type="button"
-        value="Like Me2"
-        onClick={() => likeMe2("data", 100)}
-      />
-
-      {/**Default param + User Defined param */}
-
-      <input
-        type="button"
-        value="Like Me 3"
-        onClick={(e) => likeMe3(e, "data")}
-      />
     </div>
   );
 }
