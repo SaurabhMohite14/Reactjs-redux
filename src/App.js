@@ -5,6 +5,8 @@ function App() {
   return (
     <div>
       <EventDemo />
+      <hr />
+      <EventDemo/>
     </div>
   );
 }
