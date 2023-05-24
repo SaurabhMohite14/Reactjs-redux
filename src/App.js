@@ -1,82 +1,31 @@
+import { ErrorBoundary } from "react-error-boundary";
 import "./App.css";
 import { useState } from "react";
 
 function App() {
   return (
-    <div>
-      <ListDemo />
-    </div>
-  );
-}
-
-function ListDemo() {
-  // let list = ["237", "239"];//stateless
-  let [list, setList] = useState(["237"]); //statefull
-
-  let [imageInput, setImageInput] = useState("");
-
-  let [isinvalid, setIsInvalid] = useState(false);
-
-  let addNewImage = () => {
-    if (!imageInput) {
-      alert("Enter the imageId");
-      return;
-    }
-
-    let imgInput = parseInt(imageInput);
-    if (!imgInput) {
-      setIsInvalid(true);
-    }
-    // let newList = ["238", ...list];
-    let newList = [imageInput, ...list];
-    setList(newList);
-  };
-
-  let inputImageHandler = (e) => {
-    setImageInput(e.target.value);
-  };
-
-  return (
-    <div>
-      <h1>List Demo</h1>
-      <div className="my-2">
-        <input
-          type="text"
-          placeholder="Enter Image id"
-          value={imageInput}
-          onChange={inputImageHandler}
-        />
-
-        <input type="button" value="Add new Image" onClick={addNewImage} />
-        {isinvalid && <div className="text-danger">Invalid IMage</div>}
+    <ErrorBoundary fallback={AppErrorHandler}>
+      <div>
+        <SimpleDemo />
       </div>
-      {list.map((item, index) => (
-        <EventDemo key={index} Imageid={item} />
-      ))}
+    </ErrorBoundary>
+  );
+}
+
+function SimpleDemo() {
+  let user = { id: 1, name: "rohit" };
+  return (
+    <div>
+      <h1>Hello World</h1>
+      <h1>{user}</h1>
     </div>
   );
 }
 
-function EventDemo({ Imageid }) {
-  let [counter, setCounter] = useState(100);
-
-  //statless function
-  let imageUrl = `http://picsum.photos/id/${Imageid}/200/200`;
-
-  //Member func
-  let likeMe = () => {
-    counter += 1;
-
-    //Trigger the dom Operation:: Asking the REACT to perform DOM
-
-    setCounter(counter);
-  };
-
+function AppErrorHandler() {
   return (
     <div>
-      <img src={imageUrl} alt="" />
-      <h1>Like {counter}</h1>
-      <input type="button" value="Like Me" onClick={likeMe} />
+      <h1>Handle error</h1>
     </div>
   );
 }
